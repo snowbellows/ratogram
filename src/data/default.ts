@@ -1,5 +1,7 @@
 // 5x5
 
+export const rat = "grb4f1rb3f1b1rb1f1b2f1rf4b1rb1f1b1f1b1"
+
 export const mushroom = "grb1f3b1rf5rf5rb2f1b2rb2f1b2";
 
 export const bow = "grb2f1b2rb3f1b1rf5rb3f1b1rb2f1b2";
