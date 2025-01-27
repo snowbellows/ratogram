@@ -3,7 +3,7 @@ import { InvalidGramError } from "./errors";
 /**
  * Represents a single tile in a Gram
  */
-interface Tile {
+export interface Tile {
   type: "filled" | "blank";
 }
 
@@ -53,22 +53,7 @@ function charFromTile(tile: Tile): string {
   }
 }
 
-/**
- * Serialises a Tile.
- *
- * @param {Tile} tile
- * @returns {string}
- */
-function serialiseTile(tile: Tile): string {
-  switch (tile.type) {
-    case "filled":
-      return "f";
-    case "blank":
-      return "b";
-  }
-}
-
-interface Block {
+export interface Block {
   type: "blank" | "filled";
   length: number;
 }
@@ -88,7 +73,7 @@ function serialiseBlock(block: Block): string {
   }
 }
 
-function rowToBlocks(row: Tile[]): Block[] {
+function tileArrayToBlockArray(row: Tile[]): Block[] {
   let block: Block | undefined = undefined;
   let blocks: Block[] = [];
 
@@ -222,12 +207,6 @@ export class ArrayGram {
       .join("\n");
   }
 
-  blocks() {
-    return this.tiles
-      .map((r) => r.map((t) => charFromTile(t)).join(""))
-      .join("\n");
-  }
-
   /**
    * Serialises into a short string and Base64 encodes a Gram.
    *
@@ -254,21 +233,58 @@ export class ArrayGram {
    * @returns {string}
    */
   serialise(): string {
-    const rows = this.tiles
-      .map((r) =>
-        rowToBlocks(r)
-          .map((t) => serialiseBlock(t))
-          .join("")
-      )
+    const rows = this.row_blocks()
+      .map((r) => r.map((b) => serialiseBlock(b)).join(""))
       .join("r");
-
-    const tileRows = this.tiles
-      .map((r) => r.map((t) => serialiseTile(t)).join(""))
-      .join("r");
-
-      console.log( `gr${tileRows}`);
-
 
     return `gr${rows}`;
   }
+
+  /**
+   * Returns the rows as a "2d" array of Tiles.
+   * @returns {Tile[][]}
+   */
+  rows(): Tile[][] {
+    return this.tiles;
+  }
+
+  /**
+   * Returns the columns as a "2d" array of Tiles.
+   * @returns {Tile[][]}
+   */
+  cols(): Tile[][] {
+    return this.tiles.map((r, i) => {
+      return r.map((_, j) => {
+        return this.tiles[j][i];
+      });
+    });
+  }
+
+  /**
+   * Returns the rows as a "2d" array of Blocks of ajoining filled and blank tiles.
+   * @returns {Block[][]}
+   */
+  row_blocks(): Block[][] {
+    return this.rows().map((r) => tileArrayToBlockArray(r));
+  }
+
+  /**
+   * Returns the columns as a "2d" array of Blocks of ajoining filled and blank tiles.
+   * @returns {Block[][]}
+   */
+  col_blocks(): Block[][] {
+    return this.cols().map((r) => tileArrayToBlockArray(r));
+  }
 }
+
+const rows = [
+  ["o", "o", "x"],
+  ["x", "o", "x"],
+  ["x", "o", "o"],
+];
+
+const cols = [
+  ["o", "x", "x"],
+  ["o", "o", "o"],
+  ["x", "x", "o"],
+];
