@@ -35,7 +35,11 @@ function App() {
             {r.map((t, j) => (
               <button
                 onClick={() =>
-                  updateGramWithTile({ x: i, y: j, type: "filled" })
+                  updateGramWithTile({
+                    x: i,
+                    y: j,
+                    type: t.type === "filled" ? "blank" : "filled",
+                  })
                 }
                 className={`tile${t.type === "filled" ? " filled" : ""}`}
                 key={`${i}${j}${t.type}`}
