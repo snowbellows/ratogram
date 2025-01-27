@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { Gram, GTile } from "./data";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [gram, setGram] = useState(Gram.newBlank(5));
+
+  const updateGramWithTile = ({
+    x,
+    y,
+    type,
+  }: {
+    x: number;
+    y: number;
+    type: GTile["type"];
+  }) => {
+    // TODO update Gram with Tile
+    let tiles = [...gram.tiles];
+
+    tiles[x][y] = { type };
+    const newGram = new Gram(tiles);
+
+    history.pushState({}, "", `?g=${newGram.serialise()}`);
+
+    setGram(newGram);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="gram">
+        {gram.rows().map((r, i) => (
+          <div className="grow" key={`row${i}`}>
+            {r.map((t, j) => (
+              <button
+                onClick={() =>
+                  updateGramWithTile({ x: i, y: j, type: "filled" })
+                }
+                className={`tile${t.type === "filled" ? " filled" : ""}`}
+                key={`${i}${j}${t.type}`}
+              ></button>
+            ))}
+          </div>
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

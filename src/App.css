@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  min-height: 100vh;
+  margin: auto auto;
   text-align: center;
 }
 
@@ -39,4 +39,29 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.gram {
+  aspect-ratio: 1 / 1;
+  max-height: 80vh;
+  max-width: 80vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.grow {
+  display: flex;
+  flex-grow: 1;
+}
+
+.tile {
+  flex-grow: 1;
+  background-color: #888;
+  border: 2px solid whitesmoke;
+  border-radius: 10px;
+}
+
+.filled {
+  background-color: black;
 }
