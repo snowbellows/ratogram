@@ -151,7 +151,7 @@ export class ArrayGram {
    * @returns {ArrayGram}
    */
   static newBlank(size: number): ArrayGram {
-    const side = Array(size);
+    const side = [...Array(size).keys()];
 
     const tiles = side.map(() => side.map(() => ({ type: "blank" } as Tile)));
 

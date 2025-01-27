@@ -169,21 +169,30 @@ test("ArrayGram string conversion round trip", () => {
 });
 
 test("ArrayGram block rows", () => {
-    const gram = ArrayGram.fromString(exampleString);
-    expect(gram.size == exampleTileRows.length);
-    expect(gram.row_blocks()).toStrictEqual(exampleBlockRows);
-  });
-  
-  test("ArrayGram block cols", () => {
-    const gram = ArrayGram.fromString(exampleString);
-    expect(gram.size == exampleTileRows.length);
-    expect(gram.col_blocks()).toStrictEqual(exampleBlockCols);
-  });
-  
+  const gram = ArrayGram.fromString(exampleString);
+  expect(gram.size == exampleTileRows.length);
+  expect(gram.row_blocks()).toStrictEqual(exampleBlockRows);
+});
+
+test("ArrayGram block cols", () => {
+  const gram = ArrayGram.fromString(exampleString);
+  expect(gram.size == exampleTileRows.length);
+  expect(gram.col_blocks()).toStrictEqual(exampleBlockCols);
+});
 
 test("ArrayGram serialisation", () => {
   const gram = ArrayGram.fromString(serialisationString);
   const serialised = gram.serialise();
   console.log(serialised);
   expect(serialised).toBe("grb4f1rb2f3rf5rb4f1rb4f1");
+});
+
+test("ArrayGram new blank", () => {
+  const gram = ArrayGram.newBlank(3);
+
+  expect(gram.row_blocks()).toStrictEqual([
+    [{ type: "blank", length: 3 }],
+    [{ type: "blank", length: 3 }],
+    [{ type: "blank", length: 3 }],
+  ]);
 });
