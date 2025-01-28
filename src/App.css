@@ -42,10 +42,37 @@
   color: #888;
 }
 
+.board {
+  display: flex;
+  width: 100%;
+}
+
+.row-key {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 15rem;
+
+}
+
+.krow {
+  justify-content: flex-end;
+ display: flex;
+ flex-grow: 1;
+  flex-basis: 100%;
+}
+
+.rkey {
+  margin: auto 5px;
+  /* font-size: 2rem; */
+}
+
 .gram {
   aspect-ratio: 1 / 1;
-  height: 80vh;
-  margin: auto;
+  /* width: 80vw; */
+  max-height: 80vh;
+  max-width: 80vw;
+  /* margin: auto; */
   display: flex;
   flex-direction: column;
   flex: 0 0 auto
