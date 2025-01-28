@@ -3,6 +3,7 @@
   min-height: 100vh;
   margin: auto auto;
   text-align: center;
+  display: flex;
 }
 
 .logo {
@@ -43,11 +44,11 @@
 
 .gram {
   aspect-ratio: 1 / 1;
-  max-height: 80vh;
-  max-width: 80vh;
+  height: 80vh;
   margin: auto;
   display: flex;
   flex-direction: column;
+  flex: 0 0 auto
 }
 
 .grow {
