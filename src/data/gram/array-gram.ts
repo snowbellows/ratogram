@@ -1,10 +1,13 @@
 import { InvalidGramError } from "./errors";
 
+type TileType = "filled" | "blank";
+
 /**
  * Represents a single tile in a Gram
  */
 export interface Tile {
-  type: "filled" | "blank";
+  id: string;
+  type: TileType;
 }
 
 /**
@@ -15,7 +18,7 @@ export interface Tile {
  * @param {string} char - 'O' for filled or 'X' for blank, ingores case
  * @returns {Tile}
  */
-function tileFromChar(char: string): Tile {
+function tileFromChar(id: string, char: string): Tile {
   // Check if char is a single character
   if (char.length !== 1) {
     throw new InvalidGramError(
@@ -28,9 +31,9 @@ function tileFromChar(char: string): Tile {
 
   switch (char) {
     case "O":
-      return { type: "filled" };
+      return { id: id, type: "filled" };
     case "X":
-      return { type: "blank" };
+      return { id: id, type: "blank" };
     default:
       throw new InvalidGramError(
         `Error parsing char, Expected either 'O' for filled or 'X' for blank, recieved '${char}'.`
@@ -54,7 +57,8 @@ function charFromTile(tile: Tile): string {
 }
 
 export interface Block {
-  type: "blank" | "filled";
+  id: string;
+  type: TileType;
   length: number;
 }
 
@@ -73,18 +77,21 @@ function serialiseBlock(block: Block): string {
   }
 }
 
-function tileArrayToBlockArray(row: Tile[]): Block[] {
+function tileArrayToBlockArray(id: string, row: Tile[]): Block[] {
+  let bid = 1;
   let block: Block | undefined = undefined;
   let blocks: Block[] = [];
 
   row.forEach((t) => {
     if (!block) {
       // If block is undefined create a new block with type of first tile
-      block = { type: t.type, length: 1 };
+      block = { id: `${id}xb${bid}`, type: t.type, length: 1 };
+      bid += 1;
     } else if (t.type !== block.type) {
       // If the tile type is different to the finished block push the current block and create a new one
       blocks.push(block);
-      block = { type: t.type, length: 1 };
+      block = { id: `${id}xb${bid}`, type: t.type, length: 1 };
+      bid += 1;
     } else {
       block = { ...block, length: block.length + 1 };
     }
@@ -153,7 +160,9 @@ export class ArrayGram {
   static newBlank(size: number): ArrayGram {
     const side = [...Array(size).keys()];
 
-    const tiles = side.map(() => side.map(() => ({ type: "blank" } as Tile)));
+    const tiles = side.map((i) =>
+      side.map((j) => ({ id: `r${i + 1}xc${j + 1}`, type: "blank" as TileType }))
+    );
 
     return new ArrayGram(tiles);
   }
@@ -180,11 +189,11 @@ export class ArrayGram {
     const tiles = str
       .trim()
       .split("\n")
-      .map((r) =>
+      .map((r, i) =>
         r
           .trim()
           .split("")
-          .map((c) => tileFromChar(c))
+          .map((c, j) => tileFromChar(`r${i + 1}xc${j + 1}`, c))
       );
     return new ArrayGram(tiles);
   }
@@ -265,7 +274,7 @@ export class ArrayGram {
    * @returns {Block[][]}
    */
   row_blocks(): Block[][] {
-    return this.rows().map((r) => tileArrayToBlockArray(r));
+    return this.rows().map((r, i) => tileArrayToBlockArray(`r${i+1}`, r));
   }
 
   /**
@@ -273,7 +282,7 @@ export class ArrayGram {
    * @returns {Block[][]}
    */
   col_blocks(): Block[][] {
-    return this.cols().map((r) => tileArrayToBlockArray(r));
+    return this.cols().map((r, i) => tileArrayToBlockArray(`c${i+1}`, r));
   }
 }
 

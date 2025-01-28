@@ -1,5 +1,5 @@
 import { test, expect } from "vitest";
-import { ArrayGram, Block } from "./array-gram";
+import { ArrayGram, Block, Tile } from "./array-gram";
 
 const exampleString = `
 XXXXX
@@ -14,120 +14,120 @@ const serialisationString = `XXXXO
                              XXXXO
                              XXXXO`;
 
-const exampleTileRows = [
+const exampleTileRows: Tile[][] = [
   [
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
+    { id: "r1xc1", type: "blank" },
+    { id: "r1xc2", type: "blank" },
+    { id: "r1xc3", type: "blank" },
+    { id: "r1xc4", type: "blank" },
+    { id: "r1xc5", type: "blank" },
   ],
   [
-    { type: "blank" },
-    { type: "filled" },
-    { type: "filled" },
-    { type: "blank" },
-    { type: "blank" },
+    { id: "r2xc1", type: "blank" },
+    { id: "r2xc2", type: "filled" },
+    { id: "r2xc3", type: "filled" },
+    { id: "r2xc4", type: "blank" },
+    { id: "r2xc5", type: "blank" },
   ],
   [
-    { type: "blank" },
-    { type: "blank" },
-    { type: "filled" },
-    { type: "blank" },
-    { type: "blank" },
+    { id: "r3xc1", type: "blank" },
+    { id: "r3xc2", type: "blank" },
+    { id: "r3xc3", type: "filled" },
+    { id: "r3xc4", type: "blank" },
+    { id: "r3xc5", type: "blank" },
   ],
   [
-    { type: "blank" },
-    { type: "blank" },
-    { type: "filled" },
-    { type: "filled" },
-    { type: "blank" },
+    { id: "r4xc1", type: "blank" },
+    { id: "r4xc2", type: "blank" },
+    { id: "r4xc3", type: "filled" },
+    { id: "r4xc4", type: "filled" },
+    { id: "r4xc5", type: "blank" },
   ],
   [
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
+    { id: "r5xc1", type: "blank" },
+    { id: "r5xc2", type: "blank" },
+    { id: "r5xc3", type: "blank" },
+    { id: "r5xc4", type: "blank" },
+    { id: "r5xc5", type: "blank" },
   ],
 ];
 
-const exampleTileCols = [
+const exampleTileCols: Tile[][] = [
   [
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
+    { id: "r1xc1", type: "blank" },
+    { id: "r2xc1", type: "blank" },
+    { id: "r3xc1", type: "blank" },
+    { id: "r4xc1", type: "blank" },
+    { id: "r5xc1", type: "blank" },
   ],
   [
-    { type: "blank" },
-    { type: "filled" },
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
+    { id: "r1xc2", type: "blank" },
+    { id: "r2xc2", type: "filled" },
+    { id: "r3xc2", type: "blank" },
+    { id: "r4xc2", type: "blank" },
+    { id: "r5xc2", type: "blank" },
   ],
   [
-    { type: "blank" },
-    { type: "filled" },
-    { type: "filled" },
-    { type: "filled" },
-    { type: "blank" },
+    { id: "r1xc3", type: "blank" },
+    { id: "r2xc3", type: "filled" },
+    { id: "r3xc3", type: "filled" },
+    { id: "r4xc3", type: "filled" },
+    { id: "r5xc3", type: "blank" },
   ],
   [
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
-    { type: "filled" },
-    { type: "blank" },
+    { id: "r1xc4", type: "blank" },
+    { id: "r2xc4", type: "blank" },
+    { id: "r3xc4", type: "blank" },
+    { id: "r4xc4", type: "filled" },
+    { id: "r5xc4", type: "blank" },
   ],
   [
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
-    { type: "blank" },
+    { id: "r1xc5", type: "blank" },
+    { id: "r2xc5", type: "blank" },
+    { id: "r3xc5", type: "blank" },
+    { id: "r4xc5", type: "blank" },
+    { id: "r5xc5", type: "blank" },
   ],
 ];
 
 const exampleBlockRows: Block[][] = [
-  [{ type: "blank", length: 5 }],
+  [{ id: "r1xb1", length: 5, type: "blank" }],
   [
-    { type: "blank", length: 1 },
-    { type: "filled", length: 2 },
-    { type: "blank", length: 2 },
+    { id: "r2xb1", length: 1, type: "blank" },
+    { id: "r2xb2", length: 2, type: "filled" },
+    { id: "r2xb3", length: 2, type: "blank" },
   ],
   [
-    { type: "blank", length: 2 },
-    { type: "filled", length: 1 },
-    { type: "blank", length: 2 },
+    { id: "r3xb1", length: 2, type: "blank" },
+    { id: "r3xb2", length: 1, type: "filled" },
+    { id: "r3xb3", length: 2, type: "blank" },
   ],
   [
-    { type: "blank", length: 2 },
-    { type: "filled", length: 2 },
-    { type: "blank", length: 1 },
+    { id: "r4xb1", length: 2, type: "blank" },
+    { id: "r4xb2", length: 2, type: "filled" },
+    { id: "r4xb3", length: 1, type: "blank" },
   ],
-  [{ type: "blank", length: 5 }],
+  [{ id: "r5xb1", length: 5, type: "blank" }],
 ];
 
 const exampleBlockCols: Block[][] = [
-  [{ type: "blank", length: 5 }],
+  [{ id: "c1xb1", length: 5, type: "blank" }],
   [
-    { type: "blank", length: 1 },
-    { type: "filled", length: 1 },
-    { type: "blank", length: 3 },
+    { id: "c2xb1", length: 1, type: "blank" },
+    { id: "c2xb2", length: 1, type: "filled" },
+    { id: "c2xb3", length: 3, type: "blank" },
   ],
   [
-    { type: "blank", length: 1 },
-    { type: "filled", length: 3 },
-    { type: "blank", length: 1 },
+    { id: "c3xb1", length: 1, type: "blank" },
+    { id: "c3xb2", length: 3, type: "filled" },
+    { id: "c3xb3", length: 1, type: "blank" },
   ],
   [
-    { type: "blank", length: 3 },
-    { type: "filled", length: 1 },
-    { type: "blank", length: 1 },
+    { id: "c4xb1", length: 3, type: "blank" },
+    { id: "c4xb2", length: 1, type: "filled" },
+    { id: "c4xb3", length: 1, type: "blank" },
   ],
-  [{ type: "blank", length: 5 }],
+  [{ id: "c5xb1", length: 5, type: "blank" }],
 ];
 
 // const exampleBlockRows = [
@@ -191,8 +191,26 @@ test("ArrayGram new blank", () => {
   const gram = ArrayGram.newBlank(3);
 
   expect(gram.row_blocks()).toStrictEqual([
-    [{ type: "blank", length: 3 }],
-    [{ type: "blank", length: 3 }],
-    [{ type: "blank", length: 3 }],
+    [{ id: "r1xb1", type: "blank", length: 3 }],
+    [{ id: "r2xb1", type: "blank", length: 3 }],
+    [{ id: "r3xb1", type: "blank", length: 3 }],
+  ]);
+
+  expect(gram.rows()).toStrictEqual([
+    [
+      { id: "r1xc1", type: "blank" },
+      { id: "r1xc2", type: "blank" },
+      { id: "r1xc3", type: "blank" },
+    ],
+    [
+      { id: "r2xc1", type: "blank" },
+      { id: "r2xc2", type: "blank" },
+      { id: "r2xc3", type: "blank" },
+    ],
+    [
+      { id: "r3xc1", type: "blank" },
+      { id: "r3xc2", type: "blank" },
+      { id: "r3xc3", type: "blank" },
+    ],
   ]);
 });
