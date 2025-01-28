@@ -103,11 +103,13 @@ function tileArrayToBlockArray(id: string, row: Tile[]): Block[] {
 }
 
 /**
- * Represents a full Gram using a "2d" array of tiles.
+ * Represents a full Gram using a "2d" array of tiles. 
+ * 
+ * Has a functional api with functions that modify the gram return a new instance.
  */
 export class ArrayGram {
-  size: number;
-  tiles: Tile[][];
+  readonly size: number;
+  private tiles: Tile[][];
 
   /**
    * Creates a new Gram from a "2d" array of tiles with each inner array representing one row.
@@ -161,7 +163,10 @@ export class ArrayGram {
     const side = [...Array(size).keys()];
 
     const tiles = side.map((i) =>
-      side.map((j) => ({ id: `r${i + 1}xc${j + 1}`, type: "blank" as TileType }))
+      side.map((j) => ({
+        id: `r${i + 1}xc${j + 1}`,
+        type: "blank" as TileType,
+      }))
     );
 
     return new ArrayGram(tiles);
@@ -242,7 +247,7 @@ export class ArrayGram {
    * @returns {string}
    */
   serialise(): string {
-    const rows = this.row_blocks()
+    const rows = this.rowBlocks()
       .map((r) => r.map((b) => serialiseBlock(b)).join(""))
       .join("r");
 
@@ -273,27 +278,29 @@ export class ArrayGram {
    * Returns the rows as a "2d" array of Blocks of ajoining filled and blank tiles.
    * @returns {Block[][]}
    */
-  row_blocks(): Block[][] {
-    return this.rows().map((r, i) => tileArrayToBlockArray(`r${i+1}`, r));
+  rowBlocks(): Block[][] {
+    return this.rows().map((r, i) => tileArrayToBlockArray(`r${i + 1}`, r));
   }
 
   /**
    * Returns the columns as a "2d" array of Blocks of ajoining filled and blank tiles.
    * @returns {Block[][]}
    */
-  col_blocks(): Block[][] {
-    return this.cols().map((r, i) => tileArrayToBlockArray(`c${i+1}`, r));
+  colBlocks(): Block[][] {
+    return this.cols().map((r, i) => tileArrayToBlockArray(`c${i + 1}`, r));
+  }
+
+  /**
+   * Returns a new Gram with the tile at coordinates {x, y} toggled from blank to filled or back again.
+   * @returns {ArrayGram}
+   */
+  toggleTile(coords: { x: number; y: number }): ArrayGram {
+    const { x, y } = coords;
+    let tiles = this.rows().map(r => r.map(t => ({...t})));
+    const tile = tiles[y][x];
+
+    tiles[y][x] = { ...tile, type: tile.type === "blank" ? "filled" : "blank" };
+
+    return new ArrayGram(tiles);
   }
 }
-
-const rows = [
-  ["o", "o", "x"],
-  ["x", "o", "x"],
-  ["x", "o", "o"],
-];
-
-const cols = [
-  ["o", "x", "x"],
-  ["o", "o", "o"],
-  ["x", "x", "o"],
-];

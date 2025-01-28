@@ -171,13 +171,13 @@ test("ArrayGram string conversion round trip", () => {
 test("ArrayGram block rows", () => {
   const gram = ArrayGram.fromString(exampleString);
   expect(gram.size == exampleTileRows.length);
-  expect(gram.row_blocks()).toStrictEqual(exampleBlockRows);
+  expect(gram.rowBlocks()).toStrictEqual(exampleBlockRows);
 });
 
 test("ArrayGram block cols", () => {
   const gram = ArrayGram.fromString(exampleString);
   expect(gram.size == exampleTileRows.length);
-  expect(gram.col_blocks()).toStrictEqual(exampleBlockCols);
+  expect(gram.colBlocks()).toStrictEqual(exampleBlockCols);
 });
 
 test("ArrayGram serialisation", () => {
@@ -190,7 +190,7 @@ test("ArrayGram serialisation", () => {
 test("ArrayGram new blank", () => {
   const gram = ArrayGram.newBlank(3);
 
-  expect(gram.row_blocks()).toStrictEqual([
+  expect(gram.rowBlocks()).toStrictEqual([
     [{ id: "r1xb1", type: "blank", length: 3 }],
     [{ id: "r2xb1", type: "blank", length: 3 }],
     [{ id: "r3xb1", type: "blank", length: 3 }],
@@ -212,5 +212,23 @@ test("ArrayGram new blank", () => {
       { id: "r3xc2", type: "blank" },
       { id: "r3xc3", type: "blank" },
     ],
+  ]);
+});
+
+test("ArrayGram toggle tile", () => {
+  const gram = ArrayGram.newBlank(3);
+
+  const newGram = gram.toggleTile({ x: 1, y: 0 });
+
+  expect(newGram.rows()).not.toStrictEqual(gram.rows());
+
+  expect(newGram.rowBlocks()).toStrictEqual([
+    [
+      { id: "r1xb1", type: "blank", length: 1 },
+      { id: "r1xb2", type: "filled", length: 1 },
+      { id: "r1xb3", type: "blank", length: 1 },
+    ],
+    [{ id: "r2xb1", type: "blank", length: 3 }],
+    [{ id: "r3xb1", type: "blank", length: 3 }],
   ]);
 });
