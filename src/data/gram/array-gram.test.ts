@@ -14,6 +14,8 @@ const serialisationString = `XXXXO
                              XXXXO
                              XXXXO`;
 
+const serialisedString = "grb4f1rb2f3rf5rb4f1rb4f1";
+
 const exampleTileRows: Tile[][] = [
   [
     { id: "r1xc1", type: "blank" },
@@ -183,8 +185,7 @@ test("ArrayGram block cols", () => {
 test("ArrayGram serialisation", () => {
   const gram = ArrayGram.fromString(serialisationString);
   const serialised = gram.serialise();
-  console.log(serialised);
-  expect(serialised).toBe("grb4f1rb2f3rf5rb4f1rb4f1");
+  expect(serialised).toBe(serialisedString);
 });
 
 test("ArrayGram new blank", () => {
@@ -231,4 +232,18 @@ test("ArrayGram toggle tile", () => {
     [{ id: "r2xb1", type: "blank", length: 3 }],
     [{ id: "r3xb1", type: "blank", length: 3 }],
   ]);
+});
+
+test("ArrayGram deserialise", () => {
+  const gram = ArrayGram.deserialise(serialisedString);
+  const stringGram = ArrayGram.fromString(serialisationString);
+
+  expect(gram.rows()).toStrictEqual(stringGram.rows());
+});
+
+test("ArrayGram serialise deserialise round trip", () => {
+  const gram = ArrayGram.deserialise(serialisedString);
+  const roundtripString = gram.serialise();
+
+  expect(serialisedString).toStrictEqual(roundtripString);
 });
