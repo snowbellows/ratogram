@@ -132,26 +132,6 @@ const exampleBlockCols: Block[][] = [
   [{ id: "c5xb1", length: 5, type: "blank" }],
 ];
 
-// const exampleBlockRows = [
-//   [{ length: 5, type: "blank" }],
-//   [
-//     { length: 1, type: "blank" },
-//     { length: 2, type: "filled" },
-//     { length: 2, type: "blank" },
-//   ],
-//   [
-//     { length: 2, type: "blank" },
-//     { length: 1, type: "filled" },
-//     { length: 2, type: "blank" },
-//   ],
-//   [
-//     { length: 2, type: "blank" },
-//     { length: 2, type: "filled" },
-//     { length: 1, type: "blank" },
-//   ],
-//   [{ length: 5, type: "blank" }],
-// ];
-
 test("ArrayGram string conversion rows", () => {
   const gram = ArrayGram.fromString(exampleString);
   expect(gram.size == exampleTileRows.length);
