@@ -30,7 +30,7 @@ export class GRow {
   }
 }
 
-class Gram {
+export class BlockGram {
   grid: number;
   rows: GBlock[][];
 

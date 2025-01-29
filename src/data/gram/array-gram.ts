@@ -80,6 +80,7 @@ function serialiseBlock(block: Block): string {
 function tileArrayToBlockArray(id: string, row: Tile[]): Block[] {
   let bid = 1;
   let block: Block | undefined = undefined;
+  // eslint-disable-next-line prefer-const
   let blocks: Block[] = [];
 
   row.forEach((t) => {
@@ -296,6 +297,7 @@ export class ArrayGram {
    */
   toggleTile(coords: { x: number; y: number }): ArrayGram {
     const { x, y } = coords;
+    // eslint-disable-next-line prefer-const
     let tiles = this.rows().map(r => r.map(t => ({...t})));
     const tile = tiles[y][x];
 
