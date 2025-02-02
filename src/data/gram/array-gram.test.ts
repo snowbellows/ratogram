@@ -242,6 +242,16 @@ test("ArrayGram deserialise", () => {
   expect(gram.rows()).toStrictEqual(stringGram.rows());
 });
 
+test("ArrayGram deserialise failure - incorrect block length", () => {
+  assert.throws(
+    () => {
+      ArrayGram.deserialise("grb4f");
+    },
+    InvalidGramError,
+    "Error deserialising Block, expected block to have a length of 2, received '1'."
+  );
+});
+
 test("ArrayGram serialise deserialise round trip", () => {
   const gram = ArrayGram.deserialise(serialisedString);
   const roundtripString = gram.serialise();
