@@ -1,5 +1,6 @@
-import { test, expect } from "vitest";
+import { test, expect, assert } from "vitest";
 import { ArrayGram, Block, Tile } from "./array-gram";
+import { InvalidGramError } from "./errors";
 
 const exampleString = `
 XXXXX
@@ -151,16 +152,24 @@ test("ArrayGram string conversion round trip", () => {
 });
 
 test("ArrayGram string lowercase", () => {
-  const lowercaseString = exampleString.toLowerCase()
+  const lowercaseString = exampleString.toLowerCase();
 
-  const roundTrip = ArrayGram.fromString(lowercaseString).toString()
+  const roundTrip = ArrayGram.fromString(lowercaseString).toString();
 
-  expect(lowercaseString.trim().toUpperCase()).toStrictEqual(roundTrip)
-})
+  expect(lowercaseString.trim().toUpperCase()).toStrictEqual(roundTrip);
+});
 
 test("ArrayGram string conversion failure - char other than X or O ", () => {
-  
-})
+  const str = "sfhaks";
+
+  assert.throws(
+    () => {
+      ArrayGram.fromString(str);
+    },
+    InvalidGramError,
+    `Error parsing char, expected either 'O' for filled or 'X' for blank, received '${str[0]}'.`
+  );
+});
 
 test("ArrayGram block rows", () => {
   const gram = ArrayGram.fromString(exampleString);
