@@ -302,3 +302,9 @@ test("ArrayGram validate failure - empty row", () => {
     "Expected rows to have a length of 1, received a length of 0 for row 1."
   );
 });
+
+test("ArrayGram validate empty gram", () => {
+  assert.doesNotThrow(() => {
+    ArrayGram.validate(new ArrayGram([]));
+  });
+});
