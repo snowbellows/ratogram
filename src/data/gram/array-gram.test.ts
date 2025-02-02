@@ -261,6 +261,18 @@ test("ArrayGram serialise deserialise round trip", () => {
   expect(serialisedString).toStrictEqual(roundtripString);
 });
 
+
+test("ArrayGram deserialise failure - doesn't start with g", () => {
+  assert.throws(
+    () => {
+      ArrayGram.deserialise("drb4f3");
+    },
+    InvalidGramError,
+    "Error deserialising Gram. Expected string to start with 'g', found 'd'."
+  );
+});
+
+
 test("ArrayGram deserialise failure - incorrect block length", () => {
   assert.throws(
     () => {
