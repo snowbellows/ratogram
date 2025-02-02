@@ -27,9 +27,9 @@ function tileFromChar(id: string, char: string): Tile {
   }
 
   // Allows us to ignore case
-  char.toUpperCase();
+  const charUpper = char.toUpperCase();
 
-  switch (char) {
+  switch (charUpper) {
     case "O":
       return { id: id, type: "filled" };
     case "X":

@@ -150,6 +150,18 @@ test("ArrayGram string conversion round trip", () => {
   expect(roundTripString.trim()).toBe(exampleString.trim());
 });
 
+test("ArrayGram string lowercase", () => {
+  const lowercaseString = exampleString.toLowerCase()
+
+  const roundTrip = ArrayGram.fromString(lowercaseString).toString()
+
+  expect(lowercaseString.trim().toUpperCase()).toStrictEqual(roundTrip)
+})
+
+test("ArrayGram string conversion failure - char other than X or O ", () => {
+  
+})
+
 test("ArrayGram block rows", () => {
   const gram = ArrayGram.fromString(exampleString);
   expect(gram.size == exampleTileRows.length);

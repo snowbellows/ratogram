@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1738496329474" clover="3.2.0">
-  <project timestamp="1738496329474" name="All files">
+<coverage generated="1738497021766" clover="3.2.0">
+  <project timestamp="1738497021767" name="All files">
     <metrics statements="150" coveredstatements="89" conditionals="46" coveredconditionals="24" methods="59" coveredmethods="35" elements="255" coveredelements="148" complexity="0" loc="150" ncloc="150" packages="3" files="6" classes="6"/>
     <package name="src">
       <metrics statements="14" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="12" coveredmethods="0"/>
@@ -48,16 +48,16 @@
       <metrics statements="123" coveredstatements="89" conditionals="44" coveredconditionals="24" methods="47" coveredmethods="35"/>
       <file name="array-gram.ts" path="/home/alex/code/ratogram/src/data/gram/array-gram.ts">
         <metrics statements="101" coveredstatements="89" conditionals="36" coveredconditionals="24" methods="35" coveredmethods="35"/>
-        <line num="23" count="175" type="cond" truecount="1" falsecount="1"/>
+        <line num="23" count="200" type="cond" truecount="1" falsecount="1"/>
         <line num="24" count="0" type="stmt"/>
-        <line num="30" count="175" type="stmt"/>
-        <line num="32" count="175" type="cond" truecount="2" falsecount="1"/>
-        <line num="34" count="47" type="stmt"/>
-        <line num="36" count="128" type="stmt"/>
+        <line num="30" count="200" type="stmt"/>
+        <line num="32" count="200" type="cond" truecount="2" falsecount="1"/>
+        <line num="34" count="52" type="stmt"/>
+        <line num="36" count="148" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
-        <line num="51" count="25" type="cond" truecount="2" falsecount="0"/>
-        <line num="53" count="5" type="stmt"/>
-        <line num="55" count="20" type="stmt"/>
+        <line num="51" count="50" type="cond" truecount="2" falsecount="0"/>
+        <line num="53" count="10" type="stmt"/>
+        <line num="55" count="40" type="stmt"/>
         <line num="72" count="18" type="cond" truecount="2" falsecount="0"/>
         <line num="74" count="10" type="stmt"/>
         <line num="76" count="8" type="stmt"/>
@@ -89,26 +89,26 @@
         <line num="138" count="26" type="cond" truecount="1" falsecount="1"/>
         <line num="139" count="26" type="stmt"/>
         <line num="141" count="0" type="stmt"/>
-        <line num="162" count="12" type="stmt"/>
-        <line num="163" count="12" type="stmt"/>
-        <line num="164" count="12" type="stmt"/>
-        <line num="179" count="12" type="cond" truecount="1" falsecount="1"/>
+        <line num="162" count="13" type="stmt"/>
+        <line num="163" count="13" type="stmt"/>
+        <line num="164" count="13" type="stmt"/>
+        <line num="179" count="13" type="cond" truecount="1" falsecount="1"/>
         <line num="180" count="0" type="stmt"/>
         <line num="181" count="0" type="stmt"/>
-        <line num="183" count="12" type="stmt"/>
-        <line num="186" count="12" type="stmt"/>
-        <line num="187" count="54" type="cond" truecount="1" falsecount="1"/>
+        <line num="183" count="13" type="stmt"/>
+        <line num="186" count="13" type="stmt"/>
+        <line num="187" count="59" type="cond" truecount="1" falsecount="1"/>
         <line num="188" count="0" type="stmt"/>
         <line num="202" count="2" type="stmt"/>
         <line num="204" count="2" type="stmt"/>
         <line num="205" count="18" type="stmt"/>
         <line num="211" count="2" type="stmt"/>
-        <line num="233" count="7" type="stmt"/>
-        <line num="237" count="35" type="stmt"/>
-        <line num="240" count="175" type="stmt"/>
-        <line num="242" count="7" type="stmt"/>
-        <line num="258" count="1" type="stmt"/>
-        <line num="259" count="25" type="stmt"/>
+        <line num="233" count="8" type="stmt"/>
+        <line num="237" count="40" type="stmt"/>
+        <line num="240" count="200" type="stmt"/>
+        <line num="242" count="8" type="stmt"/>
+        <line num="258" count="2" type="stmt"/>
+        <line num="259" count="50" type="stmt"/>
         <line num="289" count="2" type="stmt"/>
         <line num="290" count="18" type="stmt"/>
         <line num="293" count="2" type="stmt"/>
