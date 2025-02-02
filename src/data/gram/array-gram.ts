@@ -22,7 +22,7 @@ function tileFromChar(id: string, char: string): Tile {
   // Check if char is a single character
   if (char.length !== 1) {
     throw new InvalidGramError(
-      `Error parsing char, expected a length of 1, received ${char.length}.`
+      `Error parsing char, expected a length of 1, received ${char.length}.`,
     );
   }
 
@@ -36,7 +36,7 @@ function tileFromChar(id: string, char: string): Tile {
       return { id: id, type: "blank" };
     default:
       throw new InvalidGramError(
-        `Error parsing char, expected either 'O' for filled or 'X' for blank, received '${char}'.`
+        `Error parsing char, expected either 'O' for filled or 'X' for blank, received '${char}'.`,
       );
   }
 }
@@ -87,7 +87,7 @@ function deserialiseBlock(id: string, str: string): Block {
   const blockSize = 2;
   if (str.length !== blockSize) {
     throw new InvalidGramError(
-      `Error deserialising Block, expected block to have a length of ${blockSize}, received '${str.length}'.`
+      `Error deserialising Block, expected block to have a length of ${blockSize}, received '${str.length}'.`,
     );
   }
 
@@ -101,14 +101,14 @@ function deserialiseBlock(id: string, str: string): Block {
       break;
     default:
       throw new InvalidGramError(
-        `Error deserialising Block, expected either 'f' for filled or 'b' for blank, received '${str[0]}'.`
+        `Error deserialising Block, expected either 'f' for filled or 'b' for blank, received '${str[0]}'.`,
       );
   }
 
   const length = Number(str[1]);
   if (Number.isNaN(length)) {
     throw new InvalidGramError(
-      `Error deserialising Block, expected a number, received '${str[1]}'.`
+      `Error deserialising Block, expected a number, received '${str[1]}'.`,
     );
   }
 
@@ -188,7 +188,7 @@ export class ArrayGram {
         throw new InvalidGramError(
           `Expected rows to have a length of ${
             tiles.length
-          }, received a length of ${r.length} for row ${i + 1}.`
+          }, received a length of ${r.length} for row ${i + 1}.`,
         );
       }
     }
@@ -207,7 +207,7 @@ export class ArrayGram {
       side.map((j) => ({
         id: `r${i + 1}xc${j + 1}`,
         type: "blank" as TileType,
-      }))
+      })),
     );
 
     return new ArrayGram(tiles);
@@ -239,7 +239,7 @@ export class ArrayGram {
         r
           .trim()
           .split("")
-          .map((c, j) => tileFromChar(`r${i + 1}xc${j + 1}`, c))
+          .map((c, j) => tileFromChar(`r${i + 1}xc${j + 1}`, c)),
       );
     return new ArrayGram(tiles);
   }
@@ -309,7 +309,7 @@ export class ArrayGram {
 
     if (str[0] !== "g") {
       throw new InvalidGramError(
-        `Error deserialising Gram. Expected string to start with 'g', found '${str[0]}'.`
+        `Error deserialising Gram. Expected string to start with 'g', found '${str[0]}'.`,
       );
     }
 
@@ -342,7 +342,7 @@ export class ArrayGram {
             throw new InvalidGramError(
               `Error deserialising Gram at row ${rowId} block ${
                 wi / windowSize + 1
-              }. ${error.message}`
+              }. ${error.message}`,
             );
         }
       }

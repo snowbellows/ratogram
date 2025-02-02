@@ -20,7 +20,7 @@ export class GRow {
     // Check if blocks are of the expected length
     if (row.length !== expectedLength) {
       throw new InvalidGRowError(
-        `Row length of ${row.length} does not match expected length of ${expectedLength}.`
+        `Row length of ${row.length} does not match expected length of ${expectedLength}.`,
       );
     }
   }
@@ -36,7 +36,7 @@ export class BlockGram {
 
   constructor(blockRows: GBlock[][]) {
     const rowLengths = blockRows.map((br) =>
-      br.reduce((acc, b) => acc + b.length, 0)
+      br.reduce((acc, b) => acc + b.length, 0),
     );
 
     const x = rowLengths.reduce((acc, rL) => {

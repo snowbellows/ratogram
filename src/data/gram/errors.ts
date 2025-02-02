@@ -1,9 +1,9 @@
 export class InvalidGTileError extends Error {
-    constructor(message: string) {
-      super(`Invalid Gram Tile: ${message}`);
-      this.name = "InvalidGTileError";
-    }
+  constructor(message: string) {
+    super(`Invalid Gram Tile: ${message}`);
+    this.name = "InvalidGTileError";
   }
+}
 
 export class InvalidGRowError extends Error {
   constructor(message: string) {

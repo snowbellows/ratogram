@@ -167,7 +167,7 @@ test("ArrayGram string conversion failure - char other than X or O ", () => {
       ArrayGram.fromString(str);
     },
     InvalidGramError,
-    `Error parsing char, expected either 'O' for filled or 'X' for blank, received '${str[0]}'.`
+    `Error parsing char, expected either 'O' for filled or 'X' for blank, received '${str[0]}'.`,
   );
 });
 
@@ -261,17 +261,15 @@ test("ArrayGram serialise deserialise round trip", () => {
   expect(serialisedString).toStrictEqual(roundtripString);
 });
 
-
 test("ArrayGram deserialise failure - doesn't start with g", () => {
   assert.throws(
     () => {
       ArrayGram.deserialise("drb4f3");
     },
     InvalidGramError,
-    "Error deserialising Gram. Expected string to start with 'g', found 'd'."
+    "Error deserialising Gram. Expected string to start with 'g', found 'd'.",
   );
 });
-
 
 test("ArrayGram deserialise failure - incorrect block length", () => {
   assert.throws(
@@ -279,7 +277,7 @@ test("ArrayGram deserialise failure - incorrect block length", () => {
       ArrayGram.deserialise("grb4f");
     },
     InvalidGramError,
-    "Error deserialising Block, expected block to have a length of 2, received '1'."
+    "Error deserialising Block, expected block to have a length of 2, received '1'.",
   );
 });
 
@@ -290,7 +288,7 @@ test("ArrayGram deserialise failure - incorrect block type", () => {
       ArrayGram.deserialise(str);
     },
     InvalidGramError,
-    `Error deserialising Block, expected either 'f' for filled or 'b' for blank, received '${str[4]}'.`
+    `Error deserialising Block, expected either 'f' for filled or 'b' for blank, received '${str[4]}'.`,
   );
 });
 
@@ -301,7 +299,7 @@ test("ArrayGram deserialise failure - incorrect block type", () => {
       ArrayGram.deserialise(str);
     },
     InvalidGramError,
-    `Error deserialising Block, expected a number, received '${str[5]}'.`
+    `Error deserialising Block, expected a number, received '${str[5]}'.`,
   );
 });
 
@@ -311,7 +309,7 @@ test("ArrayGram validate failure - empty row", () => {
       ArrayGram.validate([[]]);
     },
     InvalidGramError,
-    "Expected rows to have a length of 1, received a length of 0 for row 1."
+    "Expected rows to have a length of 1, received a length of 0 for row 1.",
   );
 });
 

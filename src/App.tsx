@@ -7,7 +7,7 @@ function App() {
 
   const rowKeys = useMemo(
     () => gram.rowBlocks().map((r) => r.filter((b) => b.type === "filled")),
-    [gram]
+    [gram],
   );
 
   const updateGramWithTile = ({ x, y }: { x: number; y: number }) => {
@@ -23,16 +23,24 @@ function App() {
       <div className="board">
         <div className="row-key">
           {rowKeys.map((r, i) => (
-            <div className="krow" key={`krow${i}${r.map((b) => b.id).join("-")}`}>
+            <div
+              className="krow"
+              key={`krow${i}${r.map((b) => b.id).join("-")}`}
+            >
               {r.map((b) => (
-                <p className="rkey" key={b.id}>{b.length}</p>
+                <p className="rkey" key={b.id}>
+                  {b.length}
+                </p>
               ))}
             </div>
           ))}
         </div>
         <div className="gram">
           {gram.rows().map((r, i) => (
-            <div className="grow" key={`grow${i}${r.map((b) => b.id).join("-")}`}>
+            <div
+              className="grow"
+              key={`grow${i}${r.map((b) => b.id).join("-")}`}
+            >
               {r.map((t, j) => (
                 <button
                   onClick={() =>
