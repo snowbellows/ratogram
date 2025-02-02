@@ -260,7 +260,7 @@ test("ArrayGram deserialise failure - incorrect block length", () => {
 });
 
 test("ArrayGram deserialise failure - incorrect block type", () => {
-  const str = "grb4g4"
+  const str = "grb4g4";
   assert.throws(
     () => {
       ArrayGram.deserialise(str);
@@ -271,12 +271,22 @@ test("ArrayGram deserialise failure - incorrect block type", () => {
 });
 
 test("ArrayGram deserialise failure - incorrect block type", () => {
-  const str = "grb4fa"
+  const str = "grb4fa";
   assert.throws(
     () => {
       ArrayGram.deserialise(str);
     },
     InvalidGramError,
     `Error deserialising Block, expected a number, received '${str[5]}'.`
+  );
+});
+
+test("ArrayGram validate failure - empty row", () => {
+  assert.throws(
+    () => {
+      ArrayGram.validate([[]]);
+    },
+    InvalidGramError,
+    "Expected rows to have a length of 1, received a length of 0 for row 1."
   );
 });
