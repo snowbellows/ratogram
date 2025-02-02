@@ -186,7 +186,9 @@ export class ArrayGram {
     for (const [i, r] of tiles.entries()) {
       if (r.length !== size) {
         throw new InvalidGramError(
-          `Expected rows to have a length of ${tiles.length}, received a length of ${r.length} for row ${i}.`
+          `Expected rows to have a length of ${
+            tiles.length
+          }, received a length of ${r.length} for row ${i + 1}.`
         );
       }
     }
