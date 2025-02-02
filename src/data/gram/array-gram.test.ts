@@ -242,6 +242,13 @@ test("ArrayGram deserialise", () => {
   expect(gram.rows()).toStrictEqual(stringGram.rows());
 });
 
+test("ArrayGram serialise deserialise round trip", () => {
+  const gram = ArrayGram.deserialise(serialisedString);
+  const roundtripString = gram.serialise();
+
+  expect(serialisedString).toStrictEqual(roundtripString);
+});
+
 test("ArrayGram deserialise failure - incorrect block length", () => {
   assert.throws(
     () => {
@@ -252,9 +259,13 @@ test("ArrayGram deserialise failure - incorrect block length", () => {
   );
 });
 
-test("ArrayGram serialise deserialise round trip", () => {
-  const gram = ArrayGram.deserialise(serialisedString);
-  const roundtripString = gram.serialise();
-
-  expect(serialisedString).toStrictEqual(roundtripString);
+test("ArrayGram deserialise failure - incorrect block type", () => {
+  const str = "grb4g4"
+  assert.throws(
+    () => {
+      ArrayGram.deserialise(str);
+    },
+    InvalidGramError,
+    `Error deserialising Block, expected either 'f' for filled or 'b' for blank, received '${str[4]}'.`
+  );
 });

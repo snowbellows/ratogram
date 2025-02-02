@@ -101,7 +101,7 @@ function deserialiseBlock(id: string, str: string): Block {
       break;
     default:
       throw new InvalidGramError(
-        `Error deserialising Block, expected either 'f' for filled or 'bchar' for blank, received '${str[0]}'.`
+        `Error deserialising Block, expected either 'f' for filled or 'b' for blank, received '${str[0]}'.`
       );
   }
 
