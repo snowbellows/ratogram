@@ -107,7 +107,7 @@ function deserialiseBlock(id: string, str: string): Block {
 
   const length = Number(str[1]);
   if (Number.isNaN(length)) {
-    new InvalidGramError(
+    throw new InvalidGramError(
       `Error deserialising Block, expected a number, received '${str[1]}'.`
     );
   }
@@ -338,7 +338,9 @@ export class ArrayGram {
         } catch (error) {
           if (error instanceof InvalidGramError)
             throw new InvalidGramError(
-              `Error deserialising Gram at ${wi}. ${error.message}`
+              `Error deserialising Gram at row ${rowId} block ${
+                wi / windowSize + 1
+              }. ${error.message}`
             );
         }
       }

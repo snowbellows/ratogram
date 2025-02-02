@@ -269,3 +269,14 @@ test("ArrayGram deserialise failure - incorrect block type", () => {
     `Error deserialising Block, expected either 'f' for filled or 'b' for blank, received '${str[4]}'.`
   );
 });
+
+test("ArrayGram deserialise failure - incorrect block type", () => {
+  const str = "grb4fa"
+  assert.throws(
+    () => {
+      ArrayGram.deserialise(str);
+    },
+    InvalidGramError,
+    `Error deserialising Block, expected a number, received '${str[5]}'.`
+  );
+});
