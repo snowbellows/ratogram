@@ -183,6 +183,18 @@ test("ArrayGram block cols", () => {
   expect(gram.colBlocks()).toStrictEqual(exampleBlockCols);
 });
 
+test("ArrayGram block rows empty", () => {
+  const gram = new ArrayGram([]);
+  expect(gram.size == 0);
+  expect(gram.rowBlocks()).toStrictEqual([]);
+});
+
+test("ArrayGram block cols empty", () => {
+  const gram = new ArrayGram([]);
+  expect(gram.size == 0);
+  expect(gram.colBlocks()).toStrictEqual([]);
+});
+
 test("ArrayGram serialisation", () => {
   const gram = ArrayGram.fromString(serialisationString);
   const serialised = gram.serialise();
