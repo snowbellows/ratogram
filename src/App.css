@@ -1,9 +1,6 @@
 #root {
-  max-width: 1280px;
-  min-height: 100vh;
-  margin: auto auto;
-  text-align: center;
-  display: flex;
+  height: 100vh;
+  width: 100vw;
 }
 
 .logo {
@@ -43,15 +40,23 @@
 }
 
 .board {
-  display: flex;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  grid-template:
+    "a b b" 1fr
+    "c d d" 2fr
+    "c d d" 2fr / 1fr 2fr 2fr;
+
+  max-width: 100%;
   width: 100%;
+  padding-right: 5px;
 }
 
 .row-key {
   display: flex;
   flex-direction: column;
-  height: 80vh;
-  width: 15rem;
+  grid-row: 2/4;
+  grid-column: 1;
 }
 
 .krow {
@@ -59,11 +64,34 @@
   display: flex;
   flex-grow: 1;
   flex-basis: 100%;
+  width: 100%;
 }
 
 .rkey {
   margin: auto 5px;
-  /* font-size: 2rem; */
+  font-size: x-small;
+  font-weight: bold;
+}
+
+.col-key {
+  display: flex;
+  grid-row: 1;
+  grid-column: 2/4;
+}
+
+.kcol {
+  flex-direction: column;
+  justify-content: flex-end;
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 100%;
+  height: 100%;
+}
+
+.ckey {
+  margin: 0px auto;
+  font-size: x-small;
+  font-weight: bold;
 }
 
 .gram {
@@ -71,10 +99,11 @@
   /* width: 80vw; */
   max-height: 80vh;
   max-width: 80vw;
-  /* margin: auto; */
   display: flex;
   flex-direction: column;
   flex: 0 0 auto;
+  grid-row: 2/4;
+  grid-column: 2/4;
 }
 
 .grow {
@@ -84,9 +113,11 @@
 
 .tile {
   flex-grow: 1;
+  flex-basis: 100%;
   background-color: #888;
-  border: 2px solid whitesmoke;
-  border-radius: 10px;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 0;
 }
 
 .filled {

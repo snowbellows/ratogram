@@ -3,10 +3,15 @@ import "./App.css";
 import { Gram } from "./data";
 
 function App() {
-  const [gram, setGram] = useState(Gram.newBlank(15));
+  const [gram, setGram] = useState(Gram.newBlank(10));
 
   const rowKeys = useMemo(
     () => gram.rowBlocks().map((r) => r.filter((b) => b.type === "filled")),
+    [gram],
+  );
+
+  const colKeys = useMemo(
+    () => gram.colBlocks().map((r) => r.filter((b) => b.type === "filled")),
     [gram],
   );
 
@@ -21,6 +26,22 @@ function App() {
   return (
     <>
       <div className="board">
+        <div style={{margin: "auto"}}>🐀</div>
+        <div className="col-key">
+          {colKeys.map((r, i) => (
+            <div
+              className="kcol"
+              key={`kcol${i}${r.map((b) => b.id).join("-")}`}
+            >
+              {r.map((b) => (
+                <p className="ckey" key={b.id}>
+                  {b.length}
+                </p>
+              ))}
+            </div>
+          ))}
+        </div>
+
         <div className="row-key">
           {rowKeys.map((r, i) => (
             <div
