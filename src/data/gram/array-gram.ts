@@ -327,16 +327,15 @@ export class ArrayGram {
           const block = deserialiseBlock(`r${rowId}b${blockId}`, blockWindow);
           for (let ti = 0; ti < block.length; ti += 1) {
             const tile: Tile = { id: `r${rowId}xc${tileId}`, type: block.type };
-            if (wi + windowSize < r.length || ti + 1 < block.length) {
               yield tile;
               tileId += 1;
-            } else {
-              yield tile;
-              return tile;
-            }
           }
           blockId += 1;
           wi += windowSize;
+
+          if (wi >= r.length) {
+            return
+          }
         } catch (error) {
           if (error instanceof InvalidGramError)
             throw new InvalidGramError(

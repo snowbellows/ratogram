@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.18% </span>
+                <span class="strong">98.16% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>108/110</span>
+                <span class='fraction'>107/109</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">88.23% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>32/36</span>
+                <span class='fraction'>30/34</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.01% </span>
+                <span class="strong">98% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>99/101</span>
+                <span class='fraction'>98/100</span>
             </div>
         
             
@@ -471,8 +471,7 @@
 <a name='L406'></a><a href='#L406'>406</a>
 <a name='L407'></a><a href='#L407'>407</a>
 <a name='L408'></a><a href='#L408'>408</a>
-<a name='L409'></a><a href='#L409'>409</a>
-<a name='L410'></a><a href='#L410'>410</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L409'></a><a href='#L409'>409</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -802,15 +801,14 @@
 <span class="cline-any cline-yes">210x</span>
 <span class="cline-any cline-yes">387x</span>
 <span class="cline-any cline-yes">387x</span>
-<span class="cline-any cline-yes">312x</span>
-<span class="cline-any cline-yes">312x</span>
+<span class="cline-any cline-yes">387x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">210x</span>
+<span class="cline-any cline-yes">210x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">210x</span>
 <span class="cline-any cline-yes">75x</span>
-<span class="cline-any cline-yes">75x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">135x</span>
-<span class="cline-any cline-yes">135x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -905,7 +903,7 @@ function tileFromChar(id: string, char: string): Tile {
   // Check if char is a single character
   <span class="missing-if-branch" title="if path not taken" >I</span>if (char.length !== 1) {
 <span class="cstat-no" title="statement not covered" >    throw new InvalidGramError(</span>
-      `Error parsing char, expected a length of 1, received ${char.length}.`
+      `Error parsing char, expected a length of 1, received ${char.length}.`,
     );
   }
 &nbsp;
@@ -919,7 +917,7 @@ function tileFromChar(id: string, char: string): Tile {
       return { id: id, type: "blank" };
     default:
       throw new InvalidGramError(
-        `Error parsing char, expected either 'O' for filled or 'X' for blank, received '${char}'.`
+        `Error parsing char, expected either 'O' for filled or 'X' for blank, received '${char}'.`,
       );
   }
 }
@@ -970,7 +968,7 @@ function deserialiseBlock(id: string, str: string): Block {
   const blockSize = 2;
   if (str.length !== blockSize) {
     throw new InvalidGramError(
-      `Error deserialising Block, expected block to have a length of ${blockSize}, received '${str.length}'.`
+      `Error deserialising Block, expected block to have a length of ${blockSize}, received '${str.length}'.`,
     );
   }
 &nbsp;
@@ -984,14 +982,14 @@ function deserialiseBlock(id: string, str: string): Block {
       break;
     default:
       throw new InvalidGramError(
-        `Error deserialising Block, expected either 'f' for filled or 'b' for blank, received '${str[0]}'.`
+        `Error deserialising Block, expected either 'f' for filled or 'b' for blank, received '${str[0]}'.`,
       );
   }
 &nbsp;
   const length = Number(str[1]);
   if (Number.isNaN(length)) {
     throw new InvalidGramError(
-      `Error deserialising Block, expected a number, received '${str[1]}'.`
+      `Error deserialising Block, expected a number, received '${str[1]}'.`,
     );
   }
 &nbsp;
@@ -1071,7 +1069,7 @@ export class ArrayGram {
         throw new InvalidGramError(
           `Expected rows to have a length of ${
             tiles.length
-          }, received a length of ${r.length} for row ${i + 1}.`
+          }, received a length of ${r.length} for row ${i + 1}.`,
         );
       }
     }
@@ -1090,7 +1088,7 @@ export class ArrayGram {
       side.map((j) =&gt; ({
         id: `r${i + 1}xc${j + 1}`,
         type: "blank" as TileType,
-      }))
+      })),
     );
 &nbsp;
     return new ArrayGram(tiles);
@@ -1122,7 +1120,7 @@ export class ArrayGram {
         r
           .trim()
           .split("")
-          .map((c, j) =&gt; tileFromChar(`r${i + 1}xc${j + 1}`, c))
+          .map((c, j) =&gt; tileFromChar(`r${i + 1}xc${j + 1}`, c)),
       );
     return new ArrayGram(tiles);
   }
@@ -1192,7 +1190,7 @@ export class ArrayGram {
 &nbsp;
     if (str[0] !== "g") {
       throw new InvalidGramError(
-        `Error deserialising Gram. Expected string to start with 'g', found '${str[0]}'.`
+        `Error deserialising Gram. Expected string to start with 'g', found '${str[0]}'.`,
       );
     }
 &nbsp;
@@ -1210,22 +1208,21 @@ export class ArrayGram {
           const block = deserialiseBlock(`r${rowId}b${blockId}`, blockWindow);
           for (let ti = 0; ti &lt; block.length; ti += 1) {
             const tile: Tile = { id: `r${rowId}xc${tileId}`, type: block.type };
-            if (wi + windowSize &lt; r.length || ti + 1 &lt; block.length) {
               yield tile;
               tileId += 1;
-            } else {
-              yield tile;
-              return tile;
-            }
           }
           blockId += 1;
           wi += windowSize;
+&nbsp;
+          if (wi &gt;= r.length) {
+            return
+          }
         } catch (error) {
           <span class="missing-if-branch" title="else path not taken" >E</span>if (error instanceof InvalidGramError)
             throw new InvalidGramError(
               `Error deserialising Gram at row ${rowId} block ${
                 wi / windowSize + 1
-              }. ${error.message}`
+              }. ${error.message}`,
             );
         }
       }
@@ -1297,7 +1294,7 @@ export class ArrayGram {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-02T13:42:30.741Z
+                at 2025-02-26T23:52:37.915Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
