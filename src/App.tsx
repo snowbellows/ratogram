@@ -18,7 +18,7 @@ function App() {
   const updateGramWithTile = ({ x, y }: { x: number; y: number }) => {
     const newGram = gram.toggleTile({ x, y });
 
-    history.pushState({}, "", `?g=${newGram.serialise()}`);
+    history.pushState({}, "", `?g=${newGram.serialiseEncoded()}`);
 
     setGram(newGram);
   };
