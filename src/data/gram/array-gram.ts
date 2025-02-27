@@ -263,7 +263,7 @@ export class ArrayGram {
   }
 
   /**
-   * Serialises into a short string encoding of a Gram.
+   * Serialises into a short, human readable, string encoding of a Gram.
    *
    * Serialisation is as follows:
    * ```
@@ -327,14 +327,14 @@ export class ArrayGram {
           const block = deserialiseBlock(`r${rowId}b${blockId}`, blockWindow);
           for (let ti = 0; ti < block.length; ti += 1) {
             const tile: Tile = { id: `r${rowId}xc${tileId}`, type: block.type };
-              yield tile;
-              tileId += 1;
+            yield tile;
+            tileId += 1;
           }
           blockId += 1;
           wi += windowSize;
 
           if (wi >= r.length) {
-            return
+            return;
           }
         } catch (error) {
           if (error instanceof InvalidGramError)
@@ -353,6 +353,14 @@ export class ArrayGram {
     const tiles = rows.map((r, i) => [...parseRow(i + 1, r)]);
 
     return new ArrayGram(tiles);
+  }
+
+  serialiseEncoded(): string {
+    return btoa(this.serialise());
+  }
+
+  static deserialiseEncoded(str: string): ArrayGram {
+    return ArrayGram.deserialise(atob(str));
   }
 
   /**

@@ -303,6 +303,16 @@ test("ArrayGram deserialise failure - incorrect block type", () => {
   );
 });
 
+test("ArrayGram serialiseEncoded deserialiseEncoded round trip", () => {
+  const gram = ArrayGram.deserialise(serialisedString);
+
+  const rtEncodedString = gram.serialiseEncoded();
+
+  const rtGram = ArrayGram.deserialiseEncoded(rtEncodedString);
+
+  expect(gram.serialise()).toStrictEqual(rtGram.serialise());
+});
+
 test("ArrayGram validate failure - empty row", () => {
   assert.throws(
     () => {
